@@ -23,8 +23,9 @@ public class DemoPartitioner implements Partitioner {
         int numPartitions = partitions.size();
         if (null == keyBytes) {
             return counter.getAndIncrement() % numPartitions;
-        } else
+        } else {
             return Utils.toPositive(Utils.murmur2(keyBytes)) % numPartitions;
+        }
     }
 
     @Override

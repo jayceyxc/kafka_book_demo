@@ -1,6 +1,8 @@
 package chapter1;
 
+import chapter2.ProducerInterceptorPrefix;
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.Properties;
@@ -20,6 +22,8 @@ public class ProducerFastStart {
         properties.put("value.serializer",
                 "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("bootstrap.servers", brokerList);
+        // 使用自定义拦截器
+        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, ProducerInterceptorPrefix.class.getName());
 
 
         KafkaProducer<String, String> producer =
