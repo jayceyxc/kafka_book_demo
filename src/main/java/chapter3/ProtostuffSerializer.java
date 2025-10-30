@@ -13,9 +13,11 @@ import java.util.Map;
  * Created by 朱小厮 on 2018/7/26.
  */
 public class ProtostuffSerializer implements Serializer<Company> {
+    @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
     }
 
+    @Override
     public byte[] serialize(String topic, Company data) {
         if (data == null) {
             return null;
@@ -34,6 +36,7 @@ public class ProtostuffSerializer implements Serializer<Company> {
         return protostuff;
     }
 
+    @Override
     public void close() {
     }
 }

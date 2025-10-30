@@ -47,20 +47,21 @@ public class KafkaProducerAnalysis {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Properties props = initConfig();
+        Properties props = initPerferConfig();
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
 //        KafkaProducer<String, String> producer = new KafkaProducer<>(props,
 //                new StringSerializer(), new StringSerializer());
 
-        ProducerRecord<String, String> record = new ProducerRecord<>(topic, "hello, Kafka!");
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic,0, "first", "hello, Kafka!");
         try {
-            producer.send(record);
+            RecordMetadata recordMetadata = producer.send(record).get();
+            System.out.println("In callback: " + recordMetadata.partition() + ":" + recordMetadata.offset());
 //            producer.send(record, new Callback() {
 //                @Override
 //                public void onCompletion(RecordMetadata metadata, Exception exception) {
 //                    if (exception == null) {
-//                        System.out.println(metadata.partition() + ":" + metadata.offset());
+//                        System.out.println("In callback: " + metadata.partition() + ":" + metadata.offset());
 //                    }
 //                }
 //            });

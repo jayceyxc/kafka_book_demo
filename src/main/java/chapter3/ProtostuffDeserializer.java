@@ -12,10 +12,12 @@ import java.util.Map;
  * Created by 朱小厮 on 2018/7/26.
  */
 public class ProtostuffDeserializer implements Deserializer<Company> {
+    @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
 
     }
 
+    @Override
     public Company deserialize(String topic, byte[] data) {
         if (data == null) {
             return null;
@@ -26,6 +28,7 @@ public class ProtostuffDeserializer implements Deserializer<Company> {
         return ans;
     }
 
+    @Override
     public void close() {
 
     }

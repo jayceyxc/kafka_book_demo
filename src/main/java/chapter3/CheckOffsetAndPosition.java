@@ -4,6 +4,7 @@ import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -40,7 +41,7 @@ public class CheckOffsetAndPosition {
         consumer.assign(Arrays.asList(tp));
         long lastConsumedOffset = -1;
         while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(1000);
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(10));
             if (records.isEmpty()) {
                 break;
             }
